@@ -3,12 +3,14 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
 
-const NewsCard = () => {
+const NewsCard = ( props ) => {
+  const { title, time } = props;
+
     return ( 
-        <Card variant="outlined">  
+        <Card variant="outlined" style={{margin: '20px'}}>  
           <CardContent>
-              <Typography variant="h6">News headlines</Typography>
-              <Typography variant="caption">hours</Typography>
+              <Typography variant="h6">{title}</Typography>
+              <Typography variant="caption">{time}</Typography>
           </CardContent>
         </Card>
     
