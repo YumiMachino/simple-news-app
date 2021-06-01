@@ -2,10 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import theme from './theme';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: "#F50057",
+        // backgroundColor: "#F50057",
+        backgroundColor: `${theme.palette.primary.A700};`,
         flexGrow: 1,
         height: '65px',
         textAlign: 'center',
