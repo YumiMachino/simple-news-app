@@ -22,7 +22,7 @@ const Footer = () => {
     return ( 
         <Grid container className={classes.root}>
             <Grid item xs={12} style={{paddingTop: '20px', paddingBottom: '20px'}}> 
-                 <Typography variant='h8' color="inherit" className={classes.title}>Copyright 2021 SimpleNews</Typography>
+                 <Typography variant='subtitle2' color="inherit" className={classes.title}>Copyright 2021 SimpleNews</Typography>
             </Grid>
         </Grid>
         
