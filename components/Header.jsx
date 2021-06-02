@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,7 +35,7 @@ const Header = () => {
                     <Typography variant="h5" className={classes.title}>
                         Simple News
                     </Typography>
-                    <Button color="inherit" href="/">Top Stories</Button>
+                     <Button color="inherit" href="/">Top Stories</Button>
                     <Button color="inherit" href="/topics/business">Business</Button>
                     <Button color="inherit" href="/topics/technology">Technology</Button>
                     <Button color="inherit" href="/topics/entertainment">Entertainment</Button>

@@ -1,13 +1,60 @@
-const entertainment = () => {
-    return ( 
-         <div>
-            <h1>Entertainment page</h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nunc sed feugiat blandit. Nam aliquam efficitur turpis id bibendum. Praesent pellentesque, sapien eget luctus lobortis, diam augue mattis urna, in ullamcorper tellus lectus id urna. Donec nec purus egestas, tristique orci sed, ullamcorper nulla. Mauris vestibulum sem sit amet ex congue iaculis. Etiam vitae libero lacus. Mauris eleifend, enim eget pulvinar accumsan, turpis massa tincidunt sem, sit amet porta neque ipsum non arcu. Vestibulum luctus et mi ac vehicula. Suspendisse erat leo, hendrerit eget ultrices vel, gravida eget arcu. Nunc sit amet tellus ex. Pellentesque eleifend est scelerisque tortor malesuada posuere. Quisque erat est, varius non tincidunt in, auctor interdum nisl. Sed nulla tellus, malesuada nec justo quis, placerat sollicitudin mi.
-            </p>
+import Image from 'next/image'
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import NewsCard from '../../components/NewsCard';
+import { useState } from 'react';
 
-        </div>
-     );
+// Get entertainment articles on NewsAPI
+export const getStaticProps = async () => {
+  
+  const pageSize = 5 // number of articles to get
+
+    // 1. fetch request, return response obj
+    const res = await fetch('https://newsapi.org/v2/everything?q=entertainment&pageSize=${pageSize}&apiKey=4331fef02cae48559a06c6f79d0d66c8');
+    // 2. parse it to json, return array of obj
+    const data = await res.json();
+    const entertainmentArticles = data?.articles;
+    // 3. will be passed to the page component as props 
+    return {
+        props: { entertainmentArticles,}
+         , revalidate: 60 * 10,
+    }
+}
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        padding: '50px',
+    },
+    title: {
+        marginTop: '4px',
+    },
+}))
+
+
+const entertainment = ( props ) => {
+     const classes = useStyles();
+    const articles = props.entertainmentArticles;
+
+    return (  
+        <Grid container className={classes.root}>
+            <Grid item xs={10} style={{margin: 'auto'}}>
+                <Typography variant="h4" className={classes.title} >Entertainmnet</Typography>
+            </Grid>
+            <Grid item xs={10} style={{margin: 'auto'}}>
+                {articles.map((article,index )=> (
+                    <div key={index}>
+                        <NewsCard
+                            title={article.title}
+                            publishedAt = {article.publishedAt}
+                            urlToImage={article.urlToImage} 
+                            url={article.url}/>
+                    </div>
+                 ))}
+             </Grid>
+        </Grid>
+    )
 }
  
 export default entertainment;
